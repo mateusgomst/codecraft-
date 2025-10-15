@@ -121,7 +121,7 @@ def process_file():
         converter_emit_para_envi(arquivo_analise, analise_converted)
         
         # Passo 5: Treinar modelo e detectar anomalias
-        update_status(40, 'Treinando modelo de Deep Learning (pode demorar ~3-5 min)...')
+        update_status(40, 'Treinando modelo de Deep Learning (pode demorar)...')
         mapa_bruto_tif = os.path.join(MAPS_FOLDER, 'mapa_anomalia_bruto.tif')
         mapa_bruto_png = os.path.join(MAPS_FOLDER, 'mapa_anomalia_bruto.png')
         

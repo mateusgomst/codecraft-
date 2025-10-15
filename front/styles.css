@@ -46,6 +46,7 @@ body {
     backdrop-filter: blur(10px);
     z-index: 1000;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
 }
 
 .nav-container {
@@ -197,6 +198,11 @@ body {
     opacity: 0.9;
 }
 
+/* NOVO: Cor específica para o Hero */
+.hero .stat-label {
+    color: var(--white);
+}
+
 .cta-button {
     display: inline-flex;
     align-items: center;
@@ -241,10 +247,9 @@ body {
     opacity: 0.7;
 }
 
-/* About Section */
-.about {
+/* Sections Gerais */
+section {
     padding: 6rem 0;
-    background: var(--white);
 }
 
 .section-header {
@@ -277,6 +282,11 @@ body {
     margin: 0 auto;
 }
 
+/* About Section */
+.about {
+    background: var(--white);
+}
+
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -294,6 +304,7 @@ body {
     font-size: 1.05rem;
     color: var(--gray-medium);
     margin-bottom: 2rem;
+    line-height: 1.7;
 }
 
 .feature-list {
@@ -328,6 +339,7 @@ body {
     font-size: 0.95rem;
     color: var(--gray-medium);
     margin: 0;
+    line-height: 1.5;
 }
 
 .process-steps {
@@ -471,6 +483,7 @@ body {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
+    color: var(--gray-dark);
 }
 
 .legend-color {
@@ -491,6 +504,7 @@ body {
     font-size: 0.9rem;
     color: var(--gray-medium);
     margin-bottom: 0.5rem;
+    line-height: 1.5;
 }
 
 .info-box p:last-child {
@@ -499,13 +513,12 @@ body {
 
 /* Identification Section */
 .identification {
-    padding: 6rem 0;
     background: var(--gray-light);
 }
 
 .identification-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
 }
 
@@ -542,11 +555,13 @@ body {
     font-size: 0.95rem;
     color: var(--gray-medium);
     margin-bottom: 1.5rem;
+    line-height: 1.5;
 }
 
 .color-sample {
     height: 40px;
     border-radius: 8px;
+    margin-top: 1rem;
 }
 
 .spectral-graph {
@@ -555,45 +570,24 @@ body {
     justify-content: space-around;
     height: 60px;
     gap: 0.5rem;
+    margin-top: 1rem;
 }
 
 .graph-bar {
     flex: 1;
     background: var(--primary-green);
     border-radius: 4px 4px 0 0;
-}
-
-.temp-indicator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    font-size: 1.2rem;
-}
-
-.temp-normal {
-    color: var(--primary-green);
-    font-weight: 600;
-}
-
-.temp-arrow {
-    color: var(--gray-medium);
-}
-
-.temp-high {
-    color: var(--red);
-    font-weight: 600;
+    transition: height 0.3s ease;
 }
 
 /* Differential Section */
 .differential {
-    padding: 6rem 0;
     background: white;
 }
 
 .differential-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
     margin-bottom: 4rem;
 }
@@ -602,6 +596,7 @@ body {
     background: var(--gray-light);
     padding: 2rem;
     border-radius: 12px;
+    text-align: center;
     transition: all 0.3s ease;
 }
 
@@ -617,6 +612,7 @@ body {
 
 .diff-icon svg {
     display: block;
+    margin: 0 auto;
 }
 
 .diff-card h3 {
@@ -629,6 +625,7 @@ body {
     font-size: 1rem;
     color: var(--gray-medium);
     margin-bottom: 1rem;
+    line-height: 1.5;
 }
 
 .diff-metric {
@@ -668,19 +665,19 @@ body {
 .comparison-table td {
     padding: 1rem;
     text-align: left;
+    border-bottom: 1px solid var(--gray-light);
 }
 
 .comparison-table thead {
     background: var(--dark-green);
     color: white;
+}
+
+.comparison-table thead th {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
-}
-
-.comparison-table tbody tr {
-    border-bottom: 1px solid var(--gray-light);
 }
 
 .comparison-table .highlight {
@@ -720,6 +717,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px dashed var(--gray-medium);
+    transition: all 0.3s ease;
+}
+
+.upload-area.drag-over {
+    border-color: var(--primary-green);
+    background: var(--light-green);
 }
 
 .upload-content {
@@ -765,15 +769,10 @@ body {
     transform: translateY(-2px);
 }
 
-.upload-note {
-    margin-top: 1rem;
-    font-size: 0.85rem;
-    color: var(--gray-medium);
-}
-
 /* Processing Animation */
 .processing-content {
     text-align: center;
+    width: 100%;
 }
 
 .processing-animation {
@@ -840,6 +839,7 @@ body {
 /* Result Content */
 .result-content {
     text-align: center;
+    width: 100%;
 }
 
 .result-header {
@@ -887,39 +887,13 @@ body {
     color: var(--gray-dark);
 }
 
-.download-button,
-.reset-button {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1rem;
-    transition: all 0.3s ease;
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray-medium);
+    margin-top: 0.5rem;
 }
 
-.download-button {
-    background: var(--primary-green);
-    color: white;
-}
-
-.download-button:hover {
-    background: var(--dark-green);
-}
-
-.reset-button {
-    background: var(--gray-light);
-    color: var(--gray-dark);
-}
-
-.reset-button:hover {
-    background: var(--gray-medium);
-    color: var(--white);
-}
-
-/* NOVO: Result Preview Section */
+/* Result Preview */
 .result-preview {
     margin: 2rem 0;
     padding: 1.5rem;
@@ -954,6 +928,40 @@ body {
     transform: translateY(-2px);
 }
 
+.download-button,
+.reset-button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.download-button {
+    background: var(--primary-green);
+    color: white;
+}
+
+.download-button:hover {
+    background: var(--dark-green);
+    transform: translateY(-2px);
+}
+
+.reset-button {
+    background: var(--gray-light);
+    color: var(--gray-dark);
+}
+
+.reset-button:hover {
+    background: var(--gray-medium);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
 /* Demo Info */
 .demo-info {
     background: rgba(255, 255, 255, 0.1);
@@ -965,6 +973,7 @@ body {
 .demo-info h3 {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: white;
 }
 
 .info-steps {
@@ -976,6 +985,7 @@ body {
 .info-step {
     display: flex;
     gap: 1rem;
+    align-items: start;
 }
 
 .step-number {
@@ -994,11 +1004,14 @@ body {
 .step-content h4 {
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    color: white;
 }
 
 .step-content p {
     font-size: 0.9rem;
     opacity: 0.9;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
 }
 
 .demo-note {
@@ -1007,6 +1020,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Footer */
@@ -1026,6 +1040,7 @@ body {
 .footer-brand h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+    color: var(--light-green);
 }
 
 .footer-brand p {
@@ -1040,6 +1055,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    color: var(--light-green);
 }
 
 .footer-column ul {
@@ -1054,6 +1070,7 @@ body {
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     transition: color 0.3s;
+    font-size: 0.9rem;
 }
 
 .footer-column a:hover {
@@ -1074,16 +1091,6 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .about-grid,
-    .differential-grid,
-    .demo-container {
-        grid-template-columns: 1fr;
-    }
-
-    .identification-grid {
-        grid-template-columns: 1fr;
-    }
-
     .hero-title {
         font-size: 2.5rem;
     }
@@ -1091,6 +1098,7 @@ body {
     .hero-stats {
         gap: 2rem;
         padding: 1.5rem;
+        flex-direction: column;
     }
     
     .stat-number {
@@ -1102,7 +1110,50 @@ body {
         font-size: 1rem;
     }
 
-    .footer-content {
+    .about-grid,
+    .differential-grid,
+    .demo-container {
         grid-template-columns: 1fr;
     }
+
+    .identification-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    section {
+        padding: 4rem 0;
+    }
 }
+
+/* Animações */
+.identification-card,
+.diff-card,
+.info-step {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.identification-card.animate-in,
+.diff-card.animate-in,
+.info-step.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.info-step:nth-child(2) { transition-delay: 0.1s; }
+.info-step:nth-child(3) { transition-delay: 0.2s; }
+.info-step:nth-child(4) { transition-delay: 0.3s; }
