@@ -253,20 +253,28 @@ def get_status():
 
 @app.route('/api/download/<filename>', methods=['GET'])
 def download_file(filename):
-    """Faz download dos arquivos gerados."""
+    """Faz download dos arquivos gerados na pasta output."""
     
     # Determinar pasta baseado no tipo de arquivo
-    if filename == 'mapa_anomalia_visual_refinado.png':
+    if 'mapa_anomalia' in filename or filename.endswith('.tif'):
         file_path = os.path.join(MAPS_FOLDER, filename)
-    elif filename == 'imagem_rgb_visivel.png':
+    elif 'imagem_rgb' in filename or 'rgb' in filename.lower():
         file_path = os.path.join(VISUALIZATIONS_FOLDER, filename)
     else:
-        return jsonify({'error': 'Arquivo não encontrado'}), 404
+        return jsonify({'error': 'Tipo de arquivo não reconhecido'}), 404
     
     if not os.path.exists(file_path):
-        return jsonify({'error': 'Arquivo ainda não foi gerado'}), 404
+        return jsonify({'error': f'Arquivo não encontrado: {filename}'}), 404
     
-    return send_file(file_path, as_attachment=True)
+    try:
+        return send_file(
+            file_path,
+            as_attachment=True,
+            download_name=filename,
+            mimetype='image/png' if filename.endswith('.png') else 'image/tiff'
+        )
+    except Exception as e:
+        return jsonify({'error': f'Erro ao enviar arquivo: {str(e)}'}), 500
 
 
 @app.route('/api/preview/<filename>', methods=['GET'])

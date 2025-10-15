@@ -482,7 +482,60 @@ console.log('Elementos encontrados:', {
     resultContent: !!resultContent
 });
 
-// Carregar imagens de exemplo ao iniciar
-window.addEventListener('load', () => {
-    loadSampleImages();
-});
+// REMOVER ESTA LINHA - ESTÁ CAUSANDO ERRO:
+// window.addEventListener('load', () => {
+//     loadSampleImages();
+// });
+
+function downloadResults(results) {
+    console.log('Iniciando download dos resultados');
+    
+    // Array com os arquivos para download
+    const arquivos = [
+        {
+            nome: results.rgb_file,
+            url: `${API_URL}/download/${results.rgb_file}`,
+            descricao: 'Imagem RGB Original'
+        },
+        {
+            nome: results.map_file,
+            url: `${API_URL}/download/${results.map_file}`,
+            descricao: 'Mapa de Anomalias'
+        }
+    ];
+    
+    // Fazer download de cada arquivo com delay
+    arquivos.forEach((arquivo, index) => {
+        setTimeout(() => {
+            console.log(`Baixando ${arquivo.descricao}: ${arquivo.nome}`);
+            
+            const link = document.createElement('a');
+            link.href = arquivo.url;
+            link.download = arquivo.nome;
+            link.style.display = 'none';
+            
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            console.log(`✅ Download iniciado: ${arquivo.nome}`);
+        }, index * 1000); // 1 segundo de delay entre downloads
+    });
+    
+    // Feedback visual
+    const downloadButton = document.querySelector('.download-results-button') || 
+                          document.querySelector('.download-button');
+    
+    if (downloadButton) {
+        const originalText = downloadButton.innerHTML;
+        downloadButton.innerHTML = '✅ Downloads Iniciados!';
+        downloadButton.disabled = true;
+        
+        setTimeout(() => {
+            downloadButton.innerHTML = originalText;
+            downloadButton.disabled = false;
+        }, 3000);
+    }
+    
+    console.log('✅ Todos os downloads foram solicitados com sucesso!');
+}
